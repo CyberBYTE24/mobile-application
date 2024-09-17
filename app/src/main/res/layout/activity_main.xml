@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,13 +8,122 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="24dp"
+        android:rowCount="5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <GridLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:columnCount="2"
+            android:layout_row="0">
+
+            <TextView
+                android:layout_column="0"
+                android:text="Выберите часть треугольника: "
+                />
+
+            <Spinner
+                android:layout_column="1"
+                android:id="@+id/triangle_part_selector"
+                android:layout_width="wrap_content"
+                android:minWidth="100dp"
+                android:entries="@array/triangle_part"
+                android:layout_height="48dp" />
+
+
+        </GridLayout>
+
+        <EditText
+            android:id="@+id/input_numeric"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:inputType="numberDecimal"
+            android:text="3" />
+
+        <GridLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:columnCount="4"
+            android:layout_row="2"
+            android:layout_column="0">
+            <Button
+                android:layout_column="0"
+                android:layout_row="0"
+                android:text="="
+                android:id="@+id/calc_button"
+                />
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:fontFamily="sans-serif-medium"
+                android:text="Катет: "
+                android:textSize="12pt" />
+
+            <TextView
+                android:id="@+id/result_cat_text"
+                android:layout_row="0"
+                android:layout_column="3"
+                android:textSize="12pt"
+                android:text="0.000"/>
+        </GridLayout>
+
+        <GridLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:columnCount="4"
+            android:layout_row="3"
+            android:layout_column="0">
+
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:fontFamily="sans-serif-medium"
+                android:text="Гипотенуза: "
+                android:textSize="12pt" />
+            <TextView
+                android:id="@+id/result_gip_text"
+                android:layout_row="0"
+                android:layout_column="3"
+                android:textSize="12pt"
+                android:text="0.000"/>
+        </GridLayout>
+
+        <GridLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:columnCount="4"
+            android:layout_row="4"
+            android:layout_column="0">
+
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:fontFamily="sans-serif-medium"
+                android:text="Площадь: "
+                android:textSize="12pt" />
+            <TextView
+                android:id="@+id/result_sqr_text"
+                android:layout_row="0"
+                android:layout_column="3"
+                android:textSize="12pt"
+                android:text="0.000"/>
+        </GridLayout>
+
+    </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
