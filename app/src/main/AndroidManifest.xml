@@ -13,8 +13,9 @@
         android:theme="@style/Theme.MobileApplication"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity2"
-            android:exported="true">
+            android:name=".MainActivity3"
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,8 +23,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".MainActivity2"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="false">
+
         </activity>
     </application>
 

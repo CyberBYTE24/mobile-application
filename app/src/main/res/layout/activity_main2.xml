@@ -11,11 +11,12 @@
         android:id="@+id/x_variable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="56dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="50dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/main" />
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
