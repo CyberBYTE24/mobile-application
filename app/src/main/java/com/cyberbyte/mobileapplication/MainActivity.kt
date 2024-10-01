@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
-
         val triangleSelector : Spinner = findViewById(R.id.triangle_part_selector);
         val inputNumeric : EditText = findViewById(R.id.input_numeric);
         val calcButton : Button = findViewById(R.id.calc_button);
