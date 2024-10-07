@@ -1,6 +1,7 @@
 package com.cyberbyte.mobileapplication
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import com.cyberbyte.mobileapplication.databinding.ActivityMain4Binding
+import kotlin.reflect.typeOf
 
 class MainActivity4 : AppCompatActivity() {
     private lateinit var binding: ActivityMain4Binding
@@ -15,20 +17,14 @@ class MainActivity4 : AppCompatActivity() {
 
     private var currentQuestion = 0;
     private var score = 0;
+    private var cheatUsed = 0;
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("score", score);
         outState.putInt("currentQuestion", currentQuestion);
-
+        outState.putInt("cheatUsed", cheatUsed);
     }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        score = savedInstanceState.getInt("score")
-        currentQuestion = savedInstanceState.getInt("currentQuestion")
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
@@ -38,6 +34,7 @@ class MainActivity4 : AppCompatActivity() {
         questions.add(Question("Лондон - сталица Великобретании", true))
         questions.add(Question("Москва - сталица России", true))
         questions.add(Question("Анапа - сталица Казахстана", false))
+        questions.add(Question("Алматы - сталица Казахстана", true))
 
         binding.trueButton.setOnClickListener{
             trueButtonClicked()
@@ -48,9 +45,13 @@ class MainActivity4 : AppCompatActivity() {
         binding.nextButton.setOnClickListener {
             nextButtonClicked()
         }
+        binding.cheatButton.setOnClickListener{
+            cheatButtonClicked()
+        }
         if(savedInstanceState != null){
             score = savedInstanceState.getInt("score")
             currentQuestion = savedInstanceState.getInt("currentQuestion")
+            cheatUsed = savedInstanceState.getInt("cheatUsed")
         }
 
         binding.question.text = questions[currentQuestion].text;
@@ -92,8 +93,29 @@ class MainActivity4 : AppCompatActivity() {
             binding.nextButton.isVisible = false;
         }
     }
+    private fun cheatButtonClicked(){
+        var count = questions.count {
+            it.isCheated
+        }
+        if(count>=3){
+            var alert = AlertDialog.Builder(this);
+            alert.setTitle("Внимание!")
+            alert.setMessage("Количество подсказок исчерпано")
+            alert.show()
+            return
+        }
+        var cheatIntent = Intent(this, CheatActivity::class.java)
+        questions[currentQuestion].isCheated = true
+        startActivity(cheatIntent.apply {
+            putExtra("questionText", questions[currentQuestion].text);
+            putExtra("questionIsTrue", questions[currentQuestion].isTrue);
+        })
+
+
+
+    }
 }
 
 class Question(public var text: String, public var isTrue: Boolean) {
-
+    internal var isCheated: Boolean = false
 }
